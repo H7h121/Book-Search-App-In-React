@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Book-Search-App-In-React/static/css/main.cfdee488.css",
-    "main.js": "/Book-Search-App-In-React/static/js/main.002899c2.js",
+    "main.js": "/Book-Search-App-In-React/static/js/main.99575ce8.js",
     "index.html": "/Book-Search-App-In-React/index.html",
     "main.cfdee488.css.map": "/Book-Search-App-In-React/static/css/main.cfdee488.css.map",
-    "main.002899c2.js.map": "/Book-Search-App-In-React/static/js/main.002899c2.js.map"
+    "main.99575ce8.js.map": "/Book-Search-App-In-React/static/js/main.99575ce8.js.map"
   },
   "entrypoints": [
     "static/css/main.cfdee488.css",
-    "static/js/main.002899c2.js"
+    "static/js/main.99575ce8.js"
   ]
 }
