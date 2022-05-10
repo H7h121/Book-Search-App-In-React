@@ -6,8 +6,8 @@ const Authentication = () => {
     const clientId =
         "998452743005-etmguubtqm5kk5kp4185k7lbqq26mpvf.apps.googleusercontent.com";
     //states for hiding and showing header and button
-    const [showloginButton, setShowloginButton] = useState(false);
-    const [ShowHeader, setShowHeader] = useState(true);
+    const [showloginButton, setShowloginButton] = useState(true);
+    const [ShowHeader, setShowHeader] = useState(false);
     //google login success
     const onLoginSuccess = (res) => {
         console.log("Login Success:", res.profileObj);
