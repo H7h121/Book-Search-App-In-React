@@ -7,13 +7,17 @@ import BookList from "./BookList";
 
 const Header = () => {
   // State for loading the results
-  const [loadResults, setLoadResults] = useState(10);
+  const [add, setAdd] = useState(10);
+  //state fro getting the length of response
+  const [responselength, setResponselength] = useState(0);
+
   // state for geting query from search input
   const [query, setQuery] = useState("");
   //state for loading results
   const [loading, setLoading] = useState(false);
   //state for geting Book cards
   const [books, setbooks] = useState([]);
+  ;
   // State sor hiding and  showing button load more
   const [loadMore, setloadMore] = useState(false);
 
@@ -23,10 +27,11 @@ const Header = () => {
     setLoading(true);
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}+inauthor:${query}&key=AIzaSyAKhTHZWCnkHc2iiFb9MyotunrifavI-h0&filter=free-ebooks&maxResults=${loadResults}`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}+inauthor:${query}&key=AIzaSyAKhTHZWCnkHc2iiFb9MyotunrifavI-h0&filter=free-ebooks&maxResults=40`
       )
       .then((Response) => {
         if (Response.data.items.length > 0) {
+          setResponselength(Response.data.items.length);
           const cleanData = CleanData(Response);
           setbooks(cleanData);
           setLoading(false);
@@ -37,12 +42,18 @@ const Header = () => {
         setLoading(false);
         toast.error(`There Is No More Books Authored by ${query}`);
         console.log(error);
-        setLoadResults(10);
+        setAdd(10);
       });
   };
   //function use to  set the loadResults in the handle for the load more button in the BookList component
   const setResults = (results) => {
-    setLoadResults(results);
+
+    if (results >= 40 || responselength <= results) {
+      toast.error(`There Is No More Books Authored by ${query}`);
+      setloadMore(false);
+
+    }
+    setAdd(results);
   };
   //checking and filtering the data in book
   const CleanData = (Response) => {
@@ -59,6 +70,7 @@ const Header = () => {
       if (book.volumeInfo.hasOwnProperty("ratingsCount") === false) {
         book.volumeInfo["ratingsCount"] = "0";
       }
+
       if (book.volumeInfo.hasOwnProperty("publisher") === false) {
         book.volumeInfo["publisher"] = "not availabe yet";
       }
@@ -104,7 +116,7 @@ const Header = () => {
               <Input
                 placeholder="Search For An Authors..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => { setQuery(e.target.value); handleSubmit(e); setAdd(10); }}
               />
               <Button color="secondary">
                 <i className="fas fa-search"></i>
@@ -115,7 +127,8 @@ const Header = () => {
       </div>
       <BookList
         loading={loading}
-        loadResults={loadResults}
+        query={query}
+        loadResults={add}
         handleMoreResults={setResults}
         books={books}
         loadMore={loadMore}

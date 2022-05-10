@@ -1,12 +1,11 @@
-import { Button, Spinner } from "reactstrap";
+import { Button, Spinner, } from "reactstrap";
 import "react-toastify/dist/ReactToastify.min.css";
 import BookCard from "./BookCard.js";
 
 const BookList = (props) => {
-    const handle = (e) => {
+    const handle = () => {
         props.handleMoreResults(props.loadResults + 5);
-        props.handle(e);
-    };
+    }
     if (props.loading) {
         return (
             <div className="d-flex justify-content-center mt-3">
@@ -14,7 +13,7 @@ const BookList = (props) => {
             </div>
         );
     } else {
-        const items = props.books.map((item, i) => {
+        const items = props.books.slice(0, props.loadResults).map((item, i) => {
             return (
                 <div className="col-lg-4 mb-3" key={i}>
                     {
@@ -32,7 +31,7 @@ const BookList = (props) => {
                             Starrating={item.volumeInfo.averageRating}
                             ratingcount={item.volumeInfo.ratingsCount}
                             pdflink={item.accessInfo.pdf.downloadLink}
-                            ISBNBook={item.volumeInfo.industryIdentifiers[0].identifier}
+
                         />
                     }
                 </div>
@@ -41,13 +40,10 @@ const BookList = (props) => {
         return (
             <div className="container my-5">
                 <div className="row">{items}</div>
-                {props.loadMore ? (
-                    <Button className="load" onClick={handle}>
-                        Load more
-                    </Button>
-                ) : (
-                    ""
-                )}
+                {props.loadMore && <Button className="load" onClick={handle}>
+                    Load more
+                </Button>
+                }
             </div>
         );
     }

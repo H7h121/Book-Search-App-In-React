@@ -94,8 +94,8 @@
 }
 .cardImg {
   transform: scale(1);
-  width: "100%";
-  height: "233px";
+  width: 100%;
+  height: 50%;
 }
 .cardImg:hover {
   transform: scale(1.07);

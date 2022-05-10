@@ -21,7 +21,7 @@ const BookCard = (props) => {
   const [Open, setOpen] = useState(false);
 
   return (
-    <Card id="card" style={{ width: "233px" }} className="m-auto ">
+    <Card id="card" style={{ width: "233px", height: "733px" }} className="m-auto ">
       <CardImg
         top
         className="cardImg"
@@ -41,18 +41,14 @@ const BookCard = (props) => {
         <Button onClick={toggle}>More info</Button>
       </CardBody>
       <Modal isOpen={modal} toggle={toggle}>
+        <span onClick={toggle} style={{ marginLeft: "94%", marginTop: "3%", fontSize: "20px", cursor: "pointer" }} aria-hidden={true}>X</span>
         <div className="modal-header d-flex justify-content-center">
           <h5 className="modal-title text-center" id="exampleModalLabel">
             {props.title}
           </h5>
-          <button
-            aria-label="Close"
-            className="close"
-            type="button"
-            onClick={toggle}
-          >
-            <span aria-hidden={true}>X</span>
-          </button>
+
+
+
         </div>
         <div className="modal-body">
           <div className="d-flex justify-content-between ml-3">
@@ -71,8 +67,9 @@ const BookCard = (props) => {
           <div className="mt-3">{props.description}</div>
         </div>
         <div className="modal-footer">
-          <div className="left-silde">
+          <div className="left-silde" >
             <Button
+
               target="_blank"
               onClick={() => {
                 window.open(props.previewLink);
@@ -105,29 +102,21 @@ const BookCard = (props) => {
                 ) : (
                   ""
                 )}
-                {props.pdflink ? (
-                  <DropdownItem
-                    onClick={() => {
-                      window.open(props.pdflink);
-                    }}
-                  >
-                    pdf
-                  </DropdownItem>
-                ) : (
-                  ""
-                )}
+                {props.pdflink && <DropdownItem
+                  onClick={() => {
+                    window.open(props.pdflink);
+                  }}
+                >
+                  pdf
+                </DropdownItem>}
 
-                {props.epublink ? (
-                  <DropdownItem
-                    onClick={() => {
-                      window.open(props.epublink);
-                    }}
-                  >
-                    epub
-                  </DropdownItem>
-                ) : (
-                  ""
-                )}
+                {props.epublink && <DropdownItem
+                  onClick={() => {
+                    window.open(props.epublink);
+                  }}
+                >
+                  epub
+                </DropdownItem>}
               </DropdownMenu>
             </Dropdown>
           </div>
