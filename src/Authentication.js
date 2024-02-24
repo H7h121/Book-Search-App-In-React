@@ -4,7 +4,7 @@ import Header from "./Header";
 
 const Authentication = () => {
     const clientId =
-        "998452743005-etmguubtqm5kk5kp4185k7lbqq26mpvf.apps.googleusercontent.com";
+        "your_client_id";
     //states for hiding and showing header and button
     const [showloginButton, setShowloginButton] = useState(true);
     const [ShowHeader, setShowHeader] = useState(false);
